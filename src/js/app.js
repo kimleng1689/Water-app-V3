@@ -1610,7 +1610,10 @@ async function sendInvoiceToGmail(record, options = {}) {
     sendTelegram: sendTelegram
   };
 
-  const endpoints = ['http://localhost:5001/api/send-invoice', 'http://localhost:5000/api/send-invoice'];
+  const endpoints = ['/api/send-invoice'];
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    endpoints.push('http://localhost:5001/api/send-invoice', 'http://localhost:5000/api/send-invoice');
+  }
   let lastError = null;
 
   for (const endpoint of endpoints) {
